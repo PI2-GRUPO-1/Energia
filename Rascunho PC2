@@ -1,3 +1,18 @@
+
+
+Energia 
+
+A área de energia atua em duas frentes neste projeto: com o sistema de carregamento off-grid e com os motores e baterias do drone.
+Sistema de Carregamento Off-Grid 
+Um sistema fotovoltaico off- grid é um sistema não conectado à rede que pode ser adaptado aos mais diversos tipos de situações e localidades. Esse tipo de sistema tem apenas uma finalidade que é o carregamento de baterias. Para o projeto Frelser, o sistema funcionará como um carregamento de emergência para central de controle. O sistema off-grid é composto, em geral, por: 
+Painel Fotovoltaico 
+Banco de baterias 
+Controlador de carga 
+Inversor
+ Parte mais aparente de um sistema fotovoltaico, constituído de células fotovoltaicas de materiais semicondutores, principalmente o silício, que por meio do efeito fotovoltaico fazem a conversão direta da radiação solar em energia elétrica.
+Controlador de Carga e Inversor
+O controlador de carga ou regulador de carga permite ao usuário acompanhar o estado de tensão e carga das baterias durante o funcionamento do sistema off-grid. O inversor é responsável por transformar a corrente contínua das baterias com tensões de entrada de 12/24Vcc em tensões de 110/220Vca. 
+
 Aplicação no Projeto Frelser
 
 O sistema do projeto é uma versão compacta para que o usuário possa ter uma fonte de energia a recorrer em situações de busca onde não seja possível obter energia elétrica direto da rede. 
