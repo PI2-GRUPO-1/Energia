@@ -1,0 +1,13 @@
+Aplicação no Projeto Frelser
+
+O sistema do projeto é uma versão compacta para que o usuário possa ter uma fonte de energia a recorrer em situações de busca onde não seja possível obter energia elétrica direto da rede. 
+Como o sistema off-grid gera 12/24Vcc a central de controle é mantida com seu índice de bateria estável ao ser ligada diretamente ao controlador de carga, assim como a bateria estacionária pode ser carregada para o uso emergencial, uso categorizado por mudanças no tempo na região da missão ou afins, que possam afetar a geração de energia por meio do sistema.
+
+Para o projeto será utilizado: 
+Painel de 100W com geração média de 337Wh/dia. 
+Controlador de carga PWM de 10A
+Bateria Estacionária de 12Vcc e 30Ah. 
+
+O sistema ainda pode receber um inversor, caso seja necessário manter em funcionamento algum equipamento que trabalhe em 110/220Vca por meio da bateria. 
+
+
