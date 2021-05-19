@@ -1,0 +1,95 @@
+\chapter{Dimensionamento do Sistema de Carregamento Off-Grid}
+
+Para fins de determinar os equipamentos para compor o sistema de carregamento off-grid o tempo de uso na missão foi estipulado considerando que a central de controle consome menos energia que o carregamento da bateria do drone, mas se mantém mais tempo em funcionamento para transmissão de informações, assim o conjunto tem um consumo calculado (Cc) de 131Wh. 
+
+Para garantir que o sistema produza energia suficiente para manter os equipamentos durante a missão será considerado uma produção 20\% acima do consumo calculado, assim se aplica o fator de correção (Ft) de 0,8 em para se encontrar o consumo ideal (Ci):  
+
+\begin{equation}
+    {Ci} = \frac{Cc}{Ft} = \frac{131Wh}{0,8} = 163,75Wh
+ \end{equation}
+ 
+ Um outro fator levado em consideração dentro do projeto é que as missões do DAMTE poderão acontecer em qualquer região do país, ou seja, o sistema de carregamento off-grid ficará sujeito as horas de pleno sol (Hps) de cada região \cite{SOLAR}. Para fins do projeto foram consideradas 4 horas de sol em uma região qualquer de missão para cálculo da potência do módulo fotovoltaico (Pmf): 
+ 
+ \begin{equation}
+    {Pmf} = \frac{Ci}{Hps} = \frac{163,75Wh}{4h} = 40,9375W
+ \end{equation}
+
+Para acompanhar o sistema também é calculada a corrente necessária para o controlador de carga a ser agregado ao conjunto usando a potência e tensão do módulo. Para o projeto será utilizado um módulo de 50W e 12V, respeitando a Pmf calculada. 
+
+\begin{equation}
+    {Cca} = \frac{P}{V} = \frac{50W}{12V} = 4,1667A
+\end{equation}
+ 
+ Cca é a corrente calculada para o controlador de carga.
+ 
+ E por fim calculamos a corrente da bateria do sistema para o projeto tomando como base o maior tempo de uso entre os equipamentos mapeados e corrente do controlador, que para o projeto será considerada em 10A:
+ 
+ \begin{equation}
+    {Cb} = {Cca}\times{Mtu} = {10A}\times{2h} = 20Ah
+ \end{equation}
+ 
+ Cb é a corrente da calculada para bateria em Ampere-hora (Ah) e Mtu é o maior tempo de uso de um equipamento. 
+ 
+ Com a corrente da bateria definida, o inversor escolhido é o de onda senoidal modificada de 300W, que se adapta ao pico de potência dos equipamentos e será a saída de Vca (Tensão em corrente alternada) do sistema. Os cabos dos sistema tem a seção de 6mm², padrão que acompanha os equipamentos. 
+ 
+ \subsection{Dimensionamento da bateria do drone}
+ O cálculo do dimensionamento da bateria do drone tem como base a potência elétrica dos motores e a potência dos componentes eletrônicos. A tabela a seguir demonstra os componentes eletrônicos e suas respectivas tensões de operação, correntes máximas e potências.
+ 
+ \begin{table}[H]
+    \centering
+     \caption{Consumo dos componentes eletrônicos do drone.}
+    \footnotesize
+    \begin{tabular}{>{\centering\arraybackslash}m{100pt}|c|>{\centering\arraybackslash}m{60pt}|>{\centering\arraybackslash}m{80pt}|>{\centering\arraybackslash}m{80pt}}\hline
+    \textbf {Componente}     & \textbf {Quantidade} & \textbf {Tensão de Operação} [V] & \textbf {Corrente Máxima [A]} & \textbf {Potência Máxima [W]} \\ \hline
+    Raspberry Pi 3B+ & 1 & 5,00 & 2,50 & 12,50 \\    \hline
+    Servo-Motor SG90 & 1  & 5,00 & 0,22 & 1,10 \\ \hline
+    Controlador ESC & 4 & 3,30 & 0,29 & 0,95 \\ \hline
+     Total & 6 & - & - & 17,42 \\ \hline
+    \end{tabular}
+    \\
+    \raggedright
+    {\footnotesize Fonte: Autoria própria}
+    \label{tab:consumo_eletronico_drone}
+\end{table}
+ 
+ Em relação aos motores foi considerado o total da potência máxima, da potência em voo pairado e da potência em voo variado, sendo todos eles obtidos através da simulação de motores. Seus valores podem ser observados na tabela seguinte.
+ 
+  \begin{table}[H]
+    \centering
+    \caption{Consumo de potência dos motores do drone.}
+    \footnotesize
+    \begin{tabular}{>{\centering\arraybackslash}m{100pt}|c|>{\centering\arraybackslash}m{60pt}>{\centering\arraybackslash}m{80pt}|>{\centering\arraybackslash}m{80pt}}\hline
+    \textbf {Potência Máxima [W]} & \textbf {Potência em voo pairado [W]} & \textbf {Potência em voo variado [W]} \\ \hline
+    731,70 & 291,70 & 359,43 \\    \hline
+    \end{tabular}
+    \\
+    \raggedright
+    {\footnotesize Fonte: Autoria própria}
+    \label{tab:consumo_motor_drone}
+\end{table}
+
+Foi definido um fator de segurança de 15\% em relação à capacidade da bateria para garantir o funcionamento apropriado do drone e a integridade física da bateria. A potência de voo variado (Pvv) foi obtida a partir da capacidade de energia da bateria simulada (Esim) em kiloWatt hora, considerando o fator de segurança; e do tempo de voo (Tvoo) obtido em horas.
+
+\begin{equation}
+    {Pvv} = \frac{E}{Tvoo} = \frac{75,48Wh}{0,21h} = 359,43 W
+\end{equation}
+ 
+ Para determinar a capacidade de energia teórica da bateria (Eteorica), o tempo de voo máximo (Tvoo) foi definido como 12 minutos e a potência (Ptotal) calculada é a soma da potência dos componentes eletrônicos com a potência dos motores em voo variado que totaliza 376,86W.
+ 
+\begin{equation}
+    {E} = {Ptotal}\times{Tvoo} =   {376,86W}\times{0,2h} = 75,37 Wh
+\end{equation}
+
+ Em seguida, utiliza-se o fator de segurança de 15\% para achar a capacidade de energia real da bateria (Ereal).
+ 
+\begin{equation}
+    {Ereal} = \frac{Eteorica}{0,85} = \frac{75,7 Wh}{0,85} = 88,67 Wh
+\end{equation}
+ 
+ A bateria possui 3 células de 3,7V em série, resultando em uma tensão nominal de 11,1V. A definição da carga (C) é feita a partir da capacidade de energia real e da tensão (V) da bateria.
+ 
+\begin{equation}
+    {C} = \frac{Ereal}{V}\times{1000} = \frac{88,67 Wh}{11,1}\times{1000} = 7988,48 mAh
+\end{equation}
+ 
+ A partir da carga calculada, se conclui que a bateria mais adequada para o projeto possui 8.000mAh.
